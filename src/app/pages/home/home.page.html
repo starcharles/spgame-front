@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="reload()">
+                更新
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            ホーム
+        </ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="logout()">
+                ログアウト
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-item>
+        ユーザー名：{{(self | async)?.name}}
+    </ion-item>
+    <ion-item>
+        <ion-item class="ion-color-dark">
+           HP: {{(self | async)?.hp}}
+        </ion-item>
+        <ion-item class="ion-color-light">
+          Gold: {{(self | async)?.gold}}
+        </ion-item>
+    </ion-item>
+    <ion-item>
+        <ion-button (click)="hunt()" class="ion-color-primary">
+            探索
+        </ion-button>
+        <ion-button (click)="spell()" class="ion-color-primary">
+            スペル発行
+        </ion-button>
+    </ion-item>
+</ion-content>

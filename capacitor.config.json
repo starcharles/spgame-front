@@ -1,0 +1,7 @@
+{
+  "appId": "com.satons.spgame",
+  "appName": "spgame",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

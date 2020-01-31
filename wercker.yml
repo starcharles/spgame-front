@@ -1,0 +1,33 @@
+box: beevelop/ionic
+
+build:
+  steps:
+    - script:
+      name: node.js version
+      code: |
+        echo "node.js version: v$(node -v)"
+        echo "npm version v$(npm -v)"
+
+    - script:
+      name: ionic version
+      code: |
+        echo "ionic version: v$(ionic -v)"
+        echo "ng version v$(ng -v)"
+
+    - npm-install
+
+    - script:
+      name: lint
+      code: npm run lint
+
+    - script:
+      name: build
+      code: npm run build-dev
+#    - npm-test
+
+  after-steps:
+    - slack-notifier:
+      url: $SLACK_URL
+      channel: notify
+      username: wercker
+      notify_on: "failed"

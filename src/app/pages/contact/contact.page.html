@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>chat</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list class="chat-list">
+        <div *ngIf="self">
+            <ion-item *ngFor="let chat of chats" no-lines>
+                <div class="chat-message innermsg left" text-right *ngIf="chat.userId === self.id">
+                    <div class="right-bubble">
+                        <span class="msg-name">{{chat.userName}}</span>
+                        <span class="msg-date">      {{chat.sendDate | date:'fullTime'}}</span>
+                        <p text-wrap>{{chat.message}}</p>
+                    </div>
+                </div>
+                <div class="chat-message innermsg right" text-left *ngIf="chat.userId !== self.id">
+                    <div class="left-bubble">
+                        <span class="msg-name">{{chat.userName}}</span>
+                        <span class="msg-date">      {{chat.sendDate | date:'fullTime'}}</span>
+                        <p text-wrap>{{chat.message}}</p>
+                    </div>
+                </div>
+            </ion-item>
+        </div>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-input type="text" placeholder="メッセージを入力" [(ngModel)]="message" name="message"></ion-input>
+        <ion-buttons slot="end">
+            <ion-button slot="end" color="primary" (click)="sendChatMessage()">
+                送信
+                <ion-icon name="send"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

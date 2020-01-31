@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>battle-history</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <h2>スペルバトル履歴</h2>
+    <ion-list *ngFor="let history of btlHists;index as i;">
+        <ion-card>
+            <ion-item>
+                step.{{i+1}}
+            </ion-item>
+            <ion-item>
+                {{userIdToName(history.userId) }} : {{ actionTypeToString(history.actionType) }}
+            </ion-item>
+            <ion-item *ngIf="history.action">
+                スペル: No.{{history.cardNo}} {{ cardNoToNameJa(history.cardNo) }}
+            </ion-item>
+        </ion-card>
+    </ion-list>
+    <ion-card *ngIf="results">
+        <ion-item>
+            結果
+        </ion-item>
+        <ion-item *ngIf="results.length === 0">
+            何も起こらなかった
+        </ion-item>
+        <div *ngFor="let result of results">
+            <ion-item>
+                {{userIdToName(result.fromUserId) }} が {{userIdToName(result.toUserId) }} に
+                スペル: No.{{result.cardNo}} {{ cardNoToNameJa(result.cardNo) }} を発動
+            </ion-item>
+            <ion-item *ngIf="result.attackType !== 'change'">
+                No.{{result.targetCardNo}} {{ cardNoToNameJa(result.targetCardNo) }}
+                を {{attackTypeToString(result.attackType) }}
+            </ion-item>
+        </div>
+    </ion-card>
+
+</ion-content>

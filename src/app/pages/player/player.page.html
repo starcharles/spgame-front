@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>player list</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header color="secondary">Players</ion-list-header>
+        <div *ngFor="let user of users">
+            <div *ngIf="user.online">
+                <ion-item>
+                    {{user.name}}
+                </ion-item>
+            </div>
+            <div *ngIf="!user.online">
+                <ion-item color="medium">
+                    {{user.name}} : Offline
+                </ion-item>
+            </div>
+        </div>
+    </ion-list>
+</ion-content>

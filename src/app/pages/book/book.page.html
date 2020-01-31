@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-segment value="spell" (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="spell">
+                スペル
+            </ion-segment-button>
+            <ion-segment-button value="normal">
+                フリーポケット
+            </ion-segment-button>
+            <ion-segment-button value="special">
+                指定ポケット
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <div [ngSwitch]="card">
+        <ion-list *ngSwitchCase="'spell'">
+            <div *ngFor="let prop of properties">
+                <div *ngIf="isSpell(prop)">
+                    <ion-item [routerLink]="[prop.card.cardNo]" routerDirection="forward">
+                        <ion-thumbnail item-start>
+                            <img src="/assets/cards/{{prop?.card.cardNo}}.png">
+                        </ion-thumbnail>
+                        <h2>
+                            {{prop.card.nameJa}}
+                        </h2>
+                    </ion-item>
+                </div>
+            </div>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'normal'">
+            <div *ngFor="let prop of properties">
+                <div *ngIf="isNormal(prop)">
+                    <ion-item [routerLink]="[prop.card.cardNo]" routerDirection="forward">
+                        <ion-thumbnail item-start>
+                            <img src="/assets/cards/{{prop?.card.cardNo}}.png">
+                        </ion-thumbnail>
+                        <h2>
+                            {{prop.card.nameJa}}
+                        </h2>
+                    </ion-item>
+                </div>
+            </div>
+        </ion-list>
+        <ion-list *ngSwitchCase="'special'">
+            <div *ngFor="let prop of properties">
+                <div *ngIf="isSpecial(prop)">
+                    <ion-item [routerLink]="[prop.card.cardNo]" routerDirection="forward">
+                        <ion-thumbnail item-start>
+                            <img src="/assets/cards/{{prop?.card.cardNo}}.png">
+                        </ion-thumbnail>
+                        <h2>
+                            {{prop.card.nameJa}}
+                        </h2>
+                    </ion-item>
+                </div>
+            </div>
+        </ion-list>
+    </div>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>登録</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form #f="ngForm" class="signupForm">
+        <ion-item class="formItem">
+            <ion-label position="floating">
+                <ion-icon name="person"></ion-icon>
+                プレイヤー名
+            </ion-label>
+            <ion-input class="name"
+                    required
+                    [(ngModel)]="signup.name"
+                    type="text"
+                    name="signup.name"
+                    placeholder="キャラクター名を入力"
+            ></ion-input>
+        </ion-item>
+        <ion-item class="formItem">
+            <ion-label position="floating">
+                <ion-icon name="mail"></ion-icon>
+                メールアドレス
+            </ion-label>
+            <ion-input
+                    required
+                    [(ngModel)]="signup.email"
+                    type="email"
+                    name="signup.email"
+            ></ion-input>
+        </ion-item>
+
+        <ion-item class="formItem">
+            <ion-label position="floating">
+                <ion-icon name="key" padding-right></ion-icon>
+                パスワード
+            </ion-label>
+            <ion-input placeholder="パスワード入力"
+                    required
+                    [(ngModel)]="signup.password"
+                    type="password"
+                    name="signup.password"
+            ></ion-input>
+            <ion-input placeholder="パスワード再入力"
+                    required
+                    [(ngModel)]="signup.passwordConfirm"
+                    type="password"
+                    name="signup.passwordConfirm"
+
+            ></ion-input>
+        </ion-item>
+    </form>
+
+    <ion-button class="submitBtn" [disabled]="!f.form.valid" (click)="userRegister()" expand="block" padding>
+        登録
+    </ion-button>
+</ion-content>

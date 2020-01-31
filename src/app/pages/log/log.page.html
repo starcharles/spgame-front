@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="log">
+            <ion-segment-button value="battle">
+                呪文バトルログ
+            </ion-segment-button>
+            <!--<ion-segment-button value="chat">-->
+                <!--会話-->
+            <!--</ion-segment-button>-->
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div [ngSwitch]="log">
+        <ion-list *ngSwitchCase="'battle'">
+            <div *ngFor="let btl of battles">
+                <ion-item (tap)="onTap(btl)">
+                    <ion-card>
+                        <ion-card-header>
+                            BattleId: {{btl.id}}
+                        </ion-card-header>
+                        <ion-card-content>
+                            <div>BattleType: {{ toBattleTypeString(btl.type) }}</div>
+                            <div>state: {{ toStateString(btl.state) }}</div>
+                            <div *ngIf="btl.attacker.id === self.id">
+                                <div>攻撃者: あなた</div>
+                            </div>
+                            <div *ngIf="btl.attackerId !== self.id">
+                                <div>攻撃者: {{btl.attacker.name}}</div>
+                            </div>
+                            <div>
+                                呪文: {{ getAttackSpellName(btl)}}
+                            </div>
+
+                        </ion-card-content>
+                    </ion-card>
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <!--<ion-list *ngSwitchCase="'chat'">-->
+            <!--<div *ngFor="let prop of properties">-->
+            <!--<div *ngIf="isNormal(prop) ">-->
+            <!--<ion-item (click)="onTap(prop)">-->
+            <!--<ion-thumbnail item-start>-->
+            <!--<img src="img/thumbnail-puppy-1.jpg">-->
+            <!--</ion-thumbnail>-->
+            <!--<h2>-->
+            <!--&lt;!&ndash;{{prop.card.name}}&ndash;&gt;-->
+            <!--{{prop.card.nameJa}}-->
+            <!--</h2>-->
+            <!--</ion-item>-->
+            <!--</div>-->
+            <!--</div>-->
+        <!--</ion-list>-->
+    </div>
+</ion-content>

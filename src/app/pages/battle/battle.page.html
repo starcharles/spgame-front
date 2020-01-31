@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>battle</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngIf="showResult">
+        <ion-card-header>
+            <ion-card-title>結果</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div *ngIf="result.result === 'success'">
+                成功: {{result.message}}
+            </div>
+            <div *ngIf="result.result === 'failure'">
+                失敗: {{result.message}}
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <div *ngIf="!showResult">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>残り時間</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                {{(counter|async)/1000}} 秒
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>攻撃内容</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item>
+                    BattleID {{ battleId }}
+
+                </ion-item>
+                <div>
+                    対象プレイヤー: <span *ngFor="let name of attackedUserNames">{{name}} | </span>
+                </div>
+                <div>
+                           <h5>{{attackSpell.name}}</h5>
+                    詠唱呪文: {{attackSpell.nameJa}}
+                </div>
+                <div *ngIf="targetCard">
+                    対象カード: {{targetCard.nameJa}} (No. {{targetCard.cardNo}})
+                </div>
+            </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="playerRole !== 'attacker'">
+            <ion-card-header>
+                <ion-card-title>使用可能な防御スペル</ion-card-title>
+            </ion-card-header>
+            <ion-virtual-scroll [items]="defenseSpellCards">
+                <ion-item *virtualItem="let item">
+                    <ion-label>
+                        {{ item.card.nameJa }}
+                    </ion-label>
+                    <ion-fab-button color="primary" (click)="showPrompt(item.card, battleId)">使用</ion-fab-button>
+                </ion-item>
+            </ion-virtual-scroll>
+        </ion-card>
+    </div>
+</ion-content>

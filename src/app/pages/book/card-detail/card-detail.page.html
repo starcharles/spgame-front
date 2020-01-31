@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>card-detail</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+            <ion-item>No. {{card?.cardNo}}: ランク {{card?.rank | uppercase}}</ion-item>
+            <ion-card-subtitle>{{card?.name}}</ion-card-subtitle>
+            <ion-card-title>{{card?.nameJa}}</ion-card-title>
+        </ion-card-header>
+        <ion-thumbnail item-start>
+            <img src="assets/cards/{{card?.cardNo}}.png">
+        </ion-thumbnail>
+
+        <ion-card-content *ngIf="card && card?.content">
+            {{card?.content}}
+        </ion-card-content>
+        <ion-card-content *ngIf="!card || !card.content">
+            カードの説明文
+        </ion-card-content>
+    </ion-card>
+    <ion-list *ngIf="card?.spell && card?.spell?.spellType === 'attack'">
+        <ion-item>
+            使用可能な対象プレイヤー
+        </ion-item>
+        <div *ngFor="let user of state.users">
+            <ion-item *ngIf="user.online && user.id !== self.id">
+                <ion-label>{{user.name}}</ion-label>
+                <ion-fab-button color="primary" (tap)="showPrompt(user, card)">使用</ion-fab-button>
+            </ion-item>
+        </div>
+    </ion-list>
+</ion-content>
